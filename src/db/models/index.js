@@ -4,11 +4,23 @@ import Category from "./Category.js"
 import User from "./User.js"
 import ProductCategory from "./ProductCategory.js"
 
-Product.hasMany(Review);
-Review.belongsTo(Product);
+Product.hasMany(Review,{
+  onDelete: "cascade",
+  foreignKey: { allowNull: false },
+});
+Review.belongsTo(Product,{
+  onDelete: "cascade",
+  foreignKey: { allowNull: false },
+});
 
-User.hasMany(Review);
-Review.belongsTo(User);
+User.hasMany(Review,{
+  onDelete: "cascade",
+  foreignKey: { allowNull: false },
+});
+Review.belongsTo(User,{
+  onDelete: "cascade",
+  foreignKey: { allowNull: false },
+});
 
 Product.belongsToMany(Category, {
   through: { model: ProductCategory, unique: false },

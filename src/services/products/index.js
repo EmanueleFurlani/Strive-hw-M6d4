@@ -11,19 +11,12 @@ router
   .route("/")
   .get(async (req, res, next) => {
     try {
-      const { name } = req.query;
+      // const { name } = req.query;
       const data = await Product.findAll({
-        include: [{ model: Review, include: User }],
-        order: [["price", "ASC"]],
-        where: req.query.search
-          ? {
-              [Op.or]: [
-                { name: { [Op.iLike]: `%${req.query.search}%` } },
-                { category: { [Op.iLike]: `%${req.query.search}%` } },
-              ],
-            }
-          : {},
-      });
+        include: [
+          { model: Category, through: { attributes: [] } },
+          Review,
+        ]});
       res.send(data)
     } catch (error) {
       console.log(error);

@@ -10,7 +10,7 @@ const sequelize = new Sequelize(PGDATABASE, PGUSERNAME, PGPASSWORD, {
 
 export const syncQuelize = async () => {
     try {
-        await sequelize.sync({force: true})
+        await sequelize.sync()
     } catch (error) {
         console.log(error)
     }
